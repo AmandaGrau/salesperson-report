@@ -1,36 +1,32 @@
 """Generate sales report showing total melons each salesperson sold."""
 
 
-
-# To Do:
-# Read through sales_report.py and understand the code
-# Write comments explaining what each line of code is doing
-# Write comments explaining any improvements you can think of
-# If you have time, feel free to implement your suggested improvements
-# txt file contains name | total order | number of melons sold
-
-# Initiates blank lists to store salepeople and melons_sold
+# Variables assigned to salepeople and melons_sold as blank lists
 salespeople = []
 melons_sold = []
 
-# Opens and stores string file
+# Opens and loops over lines in text file, strips extra whitespace, and creates a list of strings
 f = open('sales-report.txt')
-
-# Initiates loop to iterate through lines in string file, strip whitespace, and split strings at indices[0] and indices[2] 
 for line in f:
     line = line.rstrip()
     entries = line.split('|')
+    
+    # Gets salesperson at index[0] and melons they've sold at index[2]
     salesperson = entries[0]
     melons = int(entries[2])
     
-    # 
+    # Checks if salesperson iis in the salespeople list
     if salesperson in salespeople:
+        # Finds position where salesperson is stored in the salespeople list
         position = salespeople.index(salesperson)
-        melons_sold[position] += melons
-        
+        # Uses salesperson index position to index into melons_sold list
+        melons_sold.append(melons_sold[position])
     else:
         salespeople.append(salesperson)
         melons_sold.append(melons)
-
+        
+# Loops through the indices in the salesperson list and 
+# and prints the name os the salesperson and the melons they've sold.
 for i in range(len(salespeople)):
     print(f'{salespeople[i]} sold {melons_sold[i]} melons')
+    
